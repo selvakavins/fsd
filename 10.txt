@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Star Rating System</title>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 100px;
+    background-color: #f2f2f2;
+}
+
+.container {
+    width: 400px;
+    margin: auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px gray;
+}
+
+.star {
+    font-size: 50px;
+    color: gray;
+    cursor: pointer;
+}
+
+.selected {
+    color: gold;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 22px;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Star Rating System</h2>
+
+<span class="star" data-value="1">★</span>
+<span class="star" data-value="2">★</span>
+<span class="star" data-value="3">★</span>
+<span class="star" data-value="4">★</span>
+<span class="star" data-value="5">★</span>
+
+<div id="result">
+Select your rating
+</div>
+
+</div>
+
+<script>
+$(document).ready(function () {
+
+    $(".star").click(function () {
+
+        let rating = $(this).data("value");
+
+        $(".star").removeClass("selected");
+
+        $(".star").each(function () {
+
+            if ($(this).data("value") <= rating) {
+                $(this).addClass("selected");
+            }
+
+        });
+
+        $("#result").text("You selected " + rating + " star(s)");
+    });
+
+});
+</script>
+
+</body>
+</html>
