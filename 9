@@ -1,0 +1,105 @@
+Create a new file named:
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Password Strength Checker</title>
+<!-- jQuery Library -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #f2f2f2;
+text-align: center;
+margin-top: 100px;
+}
+.container {
+width: 400px;
+margin: auto;
+padding: 30px;
+background-color: white;
+border-radius: 10px;
+box-shadow: 0 0 10px gray;
+}
+input {
+width: 90%;
+padding: 12px;
+font-size: 16px;
+}
+#strength {
+margin-top: 20px;
+padding: 10px;
+font-size: 20px;
+font-weight: bold;
+}
+.weak {
+color: red;
+}
+.medium {
+color: orange;
+}
+.strong {
+color: green;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>Password Strength Checker</h2>
+<input
+type="password"
+id="password"
+placeholder="Enter your password"
+>
+<div id="strength">
+Enter a password
+</div>
+</div>
+<script>
+$(document).ready(function () {
+$("#password").keyup(function () {
+let password = $(this).val();
+let score = 0;
+if (password.length >= 8) {
+score++;
+}
+if (/[a-z]/.test(password) &&
+/[A-Z]/.test(password)) {
+score++;
+}
+if (/[0-9]/.test(password)) {
+score++;
+}
+if (/[^A-Za-z0-9]/.test(password)) {
+score++;
+}
+if (password.length === 0) {
+$("#strength")
+.text("Enter a password")
+.removeClass()
+.attr("id", "strength");
+}
+else if (score <= 1) {
+$("#strength")
+.text("Weak Password")
+.removeClass()
+.addClass("weak");
+}
+else if (score <= 3) {
+$("#strength")
+.text("Medium Password")
+.removeClass()
+.addClass("medium");
+}
+else {
+$("#strength")
+.text("Strong Password")
+.removeClass()
+.addClass("strong");
+}
+});
+});
+</script>
+</body>
+</html>
