@@ -1,0 +1,84 @@
+npm create vite@latest voting-app
+cd voting-app
+npm install
+npm run dev
+Select:
+React
+JavaScript
+
+Step 2: Replace src/App.jsx with this code
+import { useState } from "react";
+import "./App.css";
+function App() {
+const [candidateA, setCandidateA] = useState(0);
+const [candidateB, setCandidateB] = useState(0);
+const [candidateC, setCandidateC] = useState(0);
+return (
+<div className="container">
+<h1>Voting Application</h1>
+<div className="card">
+<h2>Candidate A</h2>
+<p>Votes: {candidateA}</p>
+<button onClick={() => setCandidateA(candidateA + 1)}>
+Vote
+</button>
+</div>
+<div className="card">
+<h2>Candidate B</h2>
+<p>Votes: {candidateB}</p>
+<button onClick={() => setCandidateB(candidateB + 1)}>
+Vote
+</button>
+</div>
+<div className="card">
+<h2>Candidate C</h2>
+<p>Votes: {candidateC}</p>
+<button onClick={() => setCandidateC(candidateC + 1)}>
+Vote
+</button>
+</div>
+</div>
+);
+}
+export default App;
+
+Replace src/App.css with this code
+body {
+margin: 0;
+font-family: Arial, sans-serif;
+background-color: #f2f2f2;
+}
+.container {
+text-align: center;
+padding: 40px;
+}
+h1 {
+color: darkblue;
+}
+.card {
+background-color: white;
+width: 300px;
+margin: 20px auto;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 0px 10px gray;
+}
+.card h2 {
+color: darkgreen;
+}
+.card p {
+font-size: 22px;
+font-weight: bold;
+}
+button {
+background-color: darkblue;
+color: white;
+padding: 10px 25px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+button:hover {
+background-color: green;
+}
+
