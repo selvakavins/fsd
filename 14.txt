@@ -1,0 +1,138 @@
+npm create vite@latest grocery-app -- --template react
+
+cd grocery-app
+
+npm install
+
+npm run dev
+
+
+Replace src/App.jsx
+
+
+
+import { useState } from "react";
+import "./App.css";
+function App() {
+const products = [
+{ id: 1, name: "Rice", price: 60 },
+{ id: 2, name: "Milk", price: 30 },
+{ id: 3, name: "Apple", price: 120 },
+{ id: 4, name: "Bread", price: 40 }
+];
+const [cart, setCart] = useState([]);
+const addToCart = (product) => {
+const existing = cart.find(
+item => item.id === product.id
+);
+if (existing) {
+setCart(
+cart.map(item =>
+item.id === product.id
+? { ...item, qty: item.qty + 1 }
+: item
+)
+);
+} else {
+setCart([
+...cart,
+{ ...product, qty: 1 }
+]);
+}
+};
+const total = cart.reduce(
+(sum, item) =>
+sum + item.price * item.qty,
+0
+);
+const placeOrder = () => {
+if (cart.length === 0) {
+alert("Cart is Empty");
+} else {
+alert("Order Placed Successfully!");
+setCart([]);
+}
+};
+return (
+<div className="container">
+<h1>Grocery Delivery App</h1>
+<h2>Available Products</h2>
+<div className="products">
+{products.map(product => (
+<div className="card" key={product.id}>
+<h3>{product.name}</h3>
+<p>₹{product.price}</p>
+<button
+onClick={() => addToCart(product)}
+>
+Add to Cart
+</button>
+</div>
+))}
+</div>
+<h2>Shopping Cart</h2>
+{cart.length === 0 ? (
+<p>Your cart is empty</p>
+) : (
+cart.map(item => (
+<p key={item.id}>
+{item.name}
+{" - "}
+₹{item.price}
+{" × "}
+{item.qty}
+</p>
+))
+)}
+<h2>Total: ₹{total}</h2>
+<button onClick={placeOrder}>
+Place Order
+</button>
+</div>
+);
+}
+export default App;
+
+
+3: Replace src/App.css
+
+
+body {
+font-family: Arial, sans-serif;
+background-color: #f2f2f2;
+margin: 0;
+}
+.container {
+text-align: center;
+padding: 30px;
+}
+h1 {
+color: green;
+}
+.products {
+display: flex;
+justify-content: center;
+gap: 20px;
+flex-wrap: wrap;
+}
+.card {
+background-color: white;
+width: 180px;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0 0 8px gray;
+}
+.card h3 {
+color: darkgreen;
+}
+button {
+background-color: green;
+color: white;
+padding: 10px 18px;
+border: none;
+border-radius: 5px;
+cursor: pointer;
+}
+button:hover {
+background-color: darkgreen;
+}
